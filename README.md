@@ -1,4 +1,4 @@
-# 📒 Address Book in C
+# 📒 Dynamic Address Book in C
 
 A simple **Command-line dynamic Address Book Application** implemented in **C** using a **Doubly Linked List**.
 This program allows you to **add, display, edit, and delete contacts** efficiently.
