@@ -41,6 +41,28 @@ void addcontact(){
         printf("Contact add succefully!!!!\n");
 }
 
+#save contact into file
+
+void savefile(){
+    FILE *fp = fopen("Contacts.txt","w")
+    if (fp==NULL){
+        printf("ERROR IN OPENING FILE!!!")
+            return
+    }
+
+    node*temp=head;
+    while (temp!=NULL){
+        fprintf(fp,"%s|%s|%s\n",
+            temp->name,
+            temp->phone,
+            temp->gmail
+        );
+        temp=temp->next;
+    }
+    fclose(fp);
+    printf("CONTACTS SUCCESSFULLY SAVED INTO THE FILE\n");
+}
+
 void displaycontact(){
     if(head==NULL){
         printf("No contact to Display!!\n");
@@ -146,7 +168,7 @@ int main(){
     printf("----Address Book----\n");
     while(1){
        
-        printf("1.Display contct \n2.Add contact \n3.Delete contact \n4.Edit option \n5.exit \n");
+        printf("1.Display contacts \n2.Add contact \n3.Delete contact \n4.Edit option \n5.exit \n");
          printf("Enter your choice: ");
         scanf("%d",&choice);
         switch(choice){
