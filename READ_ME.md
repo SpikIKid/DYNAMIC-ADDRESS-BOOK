@@ -151,7 +151,8 @@ Address-Book/
 
 ## 👨‍💻 Author
 
-**Athul Lalu**
+**Athul Krishna**
+
 Computer Science Student
 
 ---
