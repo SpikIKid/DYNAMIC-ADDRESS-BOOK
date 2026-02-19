@@ -40,8 +40,7 @@ void addcontact(){
         temp->next=newnode;
         newnode->prev=temp;
     }
-        printf("Contact add succefully!!!!\n");
-    savefile();
+      printf("Contact added succefully!!!!\n");
 }
 
 //save contact into file
@@ -170,8 +169,9 @@ void edit(){
         printf("Invalid Choice. Please try again.\n");
         break;
     }
-    savefile();
     printf("Contact Edited succefully\n");
+    savefile();
+
 }
 
 // To Delete
@@ -231,6 +231,7 @@ int main(){
             for(int i=0;i<ac;i++){
                 addcontact();
             }
+                savefile();
                 break;
             case 3:
                 deletecontact();
@@ -252,8 +253,7 @@ int main(){
 
             default:
                 printf("Invalid Input. Please try again.\n");
-                while (getchar()!='\n')
-                break;
+                while (getchar()!='\n');
         }
     }
     return 0;
