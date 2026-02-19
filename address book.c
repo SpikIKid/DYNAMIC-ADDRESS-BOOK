@@ -171,7 +171,6 @@ void edit(){
     }
     printf("Contact Edited succefully\n");
     savefile();
-
 }
 
 // To Delete
