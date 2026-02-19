@@ -41,7 +41,7 @@ void addcontact(){
         printf("Contact add succefully!!!!\n");
 }
 
-#save contact into file
+//save contact into file
 
 void savefile(){
     FILE *fp = fopen("Contacts.txt","w")
@@ -62,6 +62,45 @@ void savefile(){
     fclose(fp);
     printf("CONTACTS SUCCESSFULLY SAVED INTO THE FILE\n");
 }
+
+//Load contact from file
+
+void load_from_file() {
+    FILE *fp = fopen("contacts.txt", "r");
+    if (fp == NULL) {
+        return;
+    }
+
+    char line[300];
+    while (fgets(line, sizeof(line), fp)) {
+        Node *newnode = (Node *)malloc(sizeof(Node));
+        if (!newnode) {
+            printf("Memory allocation failed\n");
+            break;
+        }
+
+        sscanf(line, "%99[^|]|%19[^|]|%99[^\n]",
+               newnode->name,
+               newnode->phone,
+               newnode->gmail);
+
+        newnode->prev = NULL;
+        newnode->next = NULL;
+
+        if (head == NULL) {
+            head = newnode;
+        } else {
+            Node *temp = head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = newnode;
+            newnode->prev = temp;
+        }
+    }
+
+    fclose(fp);
+}
+
 
 void displaycontact(){
     if(head==NULL){
@@ -189,14 +228,17 @@ int main(){
                 edit();
                 break;
             case 5:
+                saveToFile();
                 printf("Exiting Address Book\n");
-                Node *current=head;
-                while(current!=NULL){
-                   Node *nextnode=current->next;
-                   free(current);
-                   current=nextnode;
+
+                Node *current = head;
+                while (current != NULL) {
+                Node *nextnode = current->next;
+                    free(current);
+                       current = nextnode;
                 }
                 exit(0);
+
             default:
                 printf("Invalid Input. Please try again.\n");
                 while (getchar()!='\n')
