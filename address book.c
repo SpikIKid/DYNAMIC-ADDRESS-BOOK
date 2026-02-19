@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+void savefile();
+
 //contact structure
 typedef struct Node{
 char name[100];
@@ -39,6 +41,7 @@ void addcontact(){
         newnode->prev=temp;
     }
         printf("Contact add succefully!!!!\n");
+    savefile();
 }
 
 //save contact into file
@@ -66,7 +69,7 @@ void savefile(){
 //Load contact from file
 
 void load_from_file() {
-    FILE *fp = fopen("contacts.txt", "r");
+    FILE *fp = fopen("Contacts.txt", "r");
     if (fp == NULL) {
         return;
     }
@@ -132,6 +135,11 @@ void edit(){
     while(temp!=NULL && strcmp(temp->name,toedit)){
         temp=temp->next;
     }
+    if(temp==NULL){
+    printf("Contact not found!\n");
+    return;
+    }
+
     
     char newname[100];
     char newphone[20];
@@ -145,23 +153,24 @@ void edit(){
     {
     case 1:
         printf("Enter new name: ");
-        scanf(" %[^\n]",&newname);
+        scanf(" %[^\n]",newname);
         strcpy(temp->name,newname);
         break;
     case 2:
         printf("Enter new Phone number: ");
-        scanf(" %[^\n]",&newphone);
+        scanf(" %[^\n]",newphone);
         strcpy(temp->phone,newphone);
         break;
     case 3:
         printf("Enter new gmail: ");
-        scanf(" %[^\n]",&newgmail);
+        scanf(" %[^\n]",newgmail);
         strcpy(temp->gmail,newgmail);
         break;
     default:
         printf("Invalid Choice. Please try again.\n");
         break;
     }
+    savefile();
     printf("Contact Edited succefully\n");
 }
 
@@ -198,11 +207,13 @@ void deletecontact(){
     }
 
     free(temp);
+    savefile();
     printf("Contact succefully deleted!!!\n");
 }
 
 int main(){
     int choice=0,ac=0;
+    load_from_file();
 
     printf("----Address Book----\n");
     while(1){
