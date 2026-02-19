@@ -50,7 +50,7 @@ void savefile(){
             return
     }
 
-    node*temp=head;
+    Node*temp=head;
     while (temp!=NULL){
         fprintf(fp,"%s|%s|%s\n",
             temp->name,
